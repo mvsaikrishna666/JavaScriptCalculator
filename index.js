@@ -11,7 +11,19 @@ class Calculator {
   }
 
   delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1);
+    if (this.currentOperand !== "") {
+      this.currentOperand = this.currentOperand.toString().slice(0, -1);
+    } else if (this.currentOperand === "" && this.operation) {
+      this.currentOperand = this.previousOperand;
+      this.operation = undefined;
+      this.previousOperand = "";
+      this.previousOperandText.innerText = this.getDisplayNumber(
+        this.previousOperand
+      );
+      this.currentOperandText.innerText = this.getDisplayNumber(
+        this.currentOperand
+      );
+    }
   }
 
   appendNumber(number) {
